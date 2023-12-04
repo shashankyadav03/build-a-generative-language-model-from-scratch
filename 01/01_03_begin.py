@@ -17,6 +17,9 @@ class MarkovChain:
 
     def train(self, text):
         tokens = self._tokenize(text)
+        # loop through the tokens and build the graph
+        for current, next in zip(tokens[1:], tokens[:-1]):
+            self.graph[current].append(next)
                
 
     def generate(self, prompt, length=10):
@@ -30,7 +33,17 @@ class MarkovChain:
             if not options:
                 continue
             # use random.choice method to pick a current option
-            
+            current = random.choice(options)
             # add the random choice to the output string
-    
+            output += " " + current
         return output
+    
+def main():
+    with open("01/input.txt") as f:
+        text = f.read()
+    mc = MarkovChain()
+    mc.train(text)
+    print(mc.generate("He was"))
+
+if __name__ == "__main__":
+    main()

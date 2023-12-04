@@ -39,11 +39,11 @@ class MarkovChain:
         return output
     
 def main():
-    with open("01/input.txt") as f:
+    with open("01/song.txt") as f:
         text = f.read()
     mc = MarkovChain()
     mc.train(text)
-    print(mc.generate("He was"))
+    print(mc.generate("Don't ya"))
 
 if __name__ == "__main__":
     main()
